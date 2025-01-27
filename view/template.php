@@ -37,7 +37,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-        <?php include "view/dashboard.php";?>
+            <?php include "view/dashboard.php"; ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -51,10 +51,13 @@
     </div>
 
     <script>
-
-        function loadContent(php_page, content)
-        {
-            $("." + content).load(php_page);
+        function loadContent(php_page, content) {
+            $("." + content).load(php_page, function() {
+                // Si la página cargada es el dashboard, carga sus datos
+                if (php_page === 'view/dashboard.php') {
+                    loadDashboardData();
+                }
+            });
         }
     </script>
 </body>

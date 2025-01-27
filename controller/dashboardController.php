@@ -1,6 +1,6 @@
 <?php
 
-require_once 'model/dashboardModel.php';
+require_once '../model/dashboardModel.php';
 
 class dashboardController{
 

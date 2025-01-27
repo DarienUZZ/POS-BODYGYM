@@ -24,7 +24,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-box-open"></i>
                                 <p>
                                     Products
                                     <i class="right fas fa-angle-left"></i>
@@ -53,7 +53,7 @@
                         </li>
                         <li class="nav-item">
                             <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/sales.php', 'content-wrapper')">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>
                                     Sales
                                 </p>
@@ -69,7 +69,7 @@
                         </li>
                         <li class="nav-item">
                             <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/reports.php', 'content-wrapper')">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-chart-bar"></i>
                                 <p>
                                     Reports
                                 </p>
@@ -77,7 +77,7 @@
                         </li>
                         <li class="nav-item">
                             <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/settings.php', 'content-wrapper')">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-cogs"></i>
                                 <p>
                                     Settings
                                 </p>

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'model/dbo.php';
+require_once '../model/dbo.php';
 
 class dashboardModel{
 
@@ -21,6 +21,9 @@ class dashboardModel{
         $resultDailySales = $conn->query($queryDailySales);
         $data['dailySales'] = $resultDailySales->fetchColumn();
 
+        $queryLowStock = 'SELECT COUNT(*) AS lowStock FROM inventario WHERE cantidad < 8 AND activo = 1';
+        $resultLowStock = $conn->query($queryLowStock);
+        $data['lowStockProducts'] = $resultLowStock->fetchColumn();
 
         return $data;
 
