@@ -56,6 +56,9 @@
                 // Si la página cargada es el dashboard, carga sus datos
                 if (php_page === 'view/dashboard.php') {
                     loadDashboardData();
+                } else if (php_page === 'view/addProducts.php') {
+                    loadCategories();
+                    loadPrices();
                 }
             });
         }
