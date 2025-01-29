@@ -26,7 +26,7 @@
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-box-open"></i>
                                 <p>
-                                    Products
+                                    Inventory Management
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -38,15 +38,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/addProducts.php', 'content-wrapper')">
+                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/products.php', 'content-wrapper')">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Products</p>
+                                        <p>Products</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/categories.php', 'content-wrapper')">
+                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('s', 'content-wrapper')">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Categories</p>
+                                        <p>Prueba</p>
                                     </a>
                                 </li>
                             </ul>

@@ -2,12 +2,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Add Products</h1>
+                            <h1 class="m-0">Products</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Products / Add Products</li>
+                                <li class="breadcrumb-item active">Products / Products</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -19,12 +19,12 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col">
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Product Information</h3>
                                 </div>
-                                <form id="addProductForm">
+                                <form id="addProductForm" method="POST">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="productName">Product Name</label>
@@ -61,12 +61,8 @@
 
 
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    loadCategories();
-                });
-
                 function loadCategories() {
-                    fetch('ajax/getCategories.php')
+                    fetch('ajax/getCatalogsProducts.php')
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('La respuesta de red no fue correcta');
@@ -99,7 +95,7 @@
                 }
 
                 function loadPrices() {
-                    fetch('ajax/getCategoriePrice.php')
+                    fetch('ajax/getCatalogsPrice.php')
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('La respuesta de red no fue correcta');
@@ -127,7 +123,40 @@
                         })
                         .catch(error => {
                             console.error('Error al cargar categorías:', error);
-                            alert('Error al cargar las categorías. Por favor, intenta de nuevo.');
+                            alert('Error, try again');
                         });
+                }
+
+                function insertProduct() {
+                    document.getElementById('addProductForm').addEventListener('submit', function(event) {
+                        event.preventDefault();
+
+                        const formData = new FormData(this);
+
+                        fetch('ajax/addProducts.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('La respuesta de red no fue correcta');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                if (data.success) {
+                                    alert(data.message);
+                                    this.reset();
+                                    loadCategories();
+                                    loadPrices();
+                                } else {
+                                    alert(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('Error al guardar el producto. Por favor, intenta de nuevo.');
+                            });
+                    });
                 }
             </script>

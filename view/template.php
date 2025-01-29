@@ -16,6 +16,9 @@
 
     <!-- REQUIRED SCRIPTS -->
 
+    <!-- Agregar los estilos y scripts de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    
     <!-- jQuery -->
     <script src="view/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -59,10 +62,17 @@
                 } else if (php_page === 'view/addProducts.php') {
                     loadCategories();
                     loadPrices();
+                    // Luego agregar el evento del formulario
+                    insertProduct();
+                } else if (php_page === 'view/products.php') {
+                    loadProducts();
                 }
             });
         }
     </script>
+
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
 </body>
 
 </html>

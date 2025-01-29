@@ -1,6 +1,6 @@
 <?php
 
-require_once '../controller/products/categoryController.php';
+require_once '../controller/products/catalogsController.php';
 
 $categoryController = new CategoryController();
 $categories = $categoryController->getCategories();
