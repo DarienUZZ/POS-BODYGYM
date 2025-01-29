@@ -71,13 +71,12 @@
                         })
                         .then(data => {
                             const select = document.getElementById('productCategory');
-                            // Limpiar opciones existentes
+
                             select.innerHTML = '';
 
-                            // Agregar una opción por defecto
                             const defaultOption = document.createElement('option');
                             defaultOption.value = '';
-                            defaultOption.textContent = 'Selecciona una categoría';
+                            defaultOption.textContent = 'Select a category';
                             select.appendChild(defaultOption);
 
                             // Agregar categorías
@@ -89,7 +88,7 @@
                             });
                         })
                         .catch(error => {
-                            console.error('Error al cargar categorías:', error);
+                            console.error('Error loading categories:', error);
                             alert('Error al cargar las categorías. Por favor, intenta de nuevo.');
                         });
                 }
@@ -149,8 +148,11 @@
                                     this.reset();
                                     loadCategories();
                                     loadPrices();
+
+
                                 } else {
                                     alert(data.message);
+
                                 }
                             })
                             .catch(error => {

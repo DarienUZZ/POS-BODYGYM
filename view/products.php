@@ -103,30 +103,4 @@
             autoWidth: false
         });
     }
-
-    // function editProduct(id) {
-    //     // Implementar la edición
-    //     console.log('Editing product:', id);
-    // }
-
-    // function deleteProduct(id) {
-    //     if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-    //         fetch(`ajax/deleteProduct.php?id=${id}`, {
-    //                 method: 'DELETE'
-    //             })
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 if (data.success) {
-    //                     $('#productsTable').DataTable().ajax.reload();
-    //                     alert('Producto eliminado exitosamente');
-    //                 } else {
-    //                     alert(data.message);
-    //                 }
-    //             })
-    //             .catch(error => {
-    //                 console.error('Error:', error);
-    //                 alert('Error al eliminar el producto');
-    //             });
-    //     }
-    // }
 </script>

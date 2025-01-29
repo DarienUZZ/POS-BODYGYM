@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// If session isn't started, redirect to google.com using header()
+if (!isset($_SESSION['logged_in']) && $_SESSION['logged_in'] !== true) {
+    header('Location: view/login.php');
+    exit();
+}
+
+// Rest of your application code here
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +31,7 @@
 
     <!-- Agregar los estilos y scripts de DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    
+
     <!-- jQuery -->
     <script src="view/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -41,6 +54,13 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <?php include "view/dashboard.php"; ?>
+            <?php 
+
+                $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+                echo $url;
+            
+            ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

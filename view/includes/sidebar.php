@@ -44,9 +44,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('s', 'content-wrapper')">
+                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/categories.php', 'content-wrapper')">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Prueba</p>
+                                        <p>Categories</p>
                                     </a>
                                 </li>
                             </ul>

@@ -18,5 +18,9 @@
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
+
+
+                van la creacion de categorias como
+                precios-tipos de productos
                 </div><!-- /.container-fluid -->
             </div>
