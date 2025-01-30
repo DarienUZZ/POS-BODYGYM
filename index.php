@@ -1,6 +1,114 @@
 <?php
+require_once "controller/pagesController.php";
+session_start();
 
-require_once "controller/templateController.php";
+// Verificar sesión
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: view/login.php');
+    exit();
+}
 
-$template = new templateController();
-$template -> getTemplate();
+// Manejo de rutas
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Instanciar el controlador una sola vez
+$controller = new PagesController();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Point of sale</title>
+
+    <link rel="shortcut icon" href="view/assets/dist/img/logo-body-gym.png" type="image/x-icon">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="view/assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="view/assets/dist/css/adminlte.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- jQuery -->
+    <script src="view/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="view/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="view/assets/dist/js/adminlte.min.js"></script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Includes de navbar y sidebar -->
+        <?php
+        include "view/includes/navbar.php";
+        include "view/includes/sidebar.php";
+        ?>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <?php
+        // Router básico
+        switch ($uri) {
+            case '/POS-BODYGYM/':
+                $controller->index();
+                break;
+            case '/POS-BODYGYM/products':
+                $controller->products();
+                break;
+            case '/POS-BODYGYM/addProducts':
+                $controller->addProducts();
+                break;
+            case '/POS-BODYGYM/categories':
+                $controller->categories();
+                break;
+            case '/POS-BODYGYM/prices':
+                $controller->prices();
+                break;
+            case '/POS-BODYGYM/sales':
+                $controller->sales();
+                break;
+            case '/POS-BODYGYM/users':
+                $controller->users();
+                break;
+            case '/POS-BODYGYM/logout':
+                $controller->logout();
+                break;
+            default:
+                $controller->error404();
+                break;
+        }
+            ?>
+
+        </div>
+
+        <!-- Footer -->
+        <?php include "view/includes/footer.php"; ?>
+    </div>
+
+    <script>
+        function loadContent(php_page, content) {
+            $("." + content).load(php_page, function() {
+                if (php_page === 'view/dashboard.php') {
+                    loadDashboardData();
+                } else if (php_page === 'view/addProducts.php') {
+                    loadCategories();
+                    loadPrices();
+                    insertProduct();
+                } else if (php_page === 'view/products.php') {
+                    loadProducts();
+                }
+            });
+        }
+    </script>
+
+    <!-- DataTables Scripts -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+</body>
+
+</html>

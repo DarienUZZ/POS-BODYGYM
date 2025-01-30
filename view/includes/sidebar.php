@@ -15,7 +15,7 @@
                with font-awesome or any other icon font library -->
 
                         <li class="nav-item">
-                            <a style="cursor: pointer;" class="nav-link active" onclick="loadContent('view/dashboard.php', 'content-wrapper')">
+                            <a style="cursor: pointer;" class="nav-link active" href="/POS-BODYGYM/">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
@@ -32,13 +32,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/products.php', 'content-wrapper')">
+                                    <a class="nav-link" href="/POS-BODYGYM/">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Inventory</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/products.php', 'content-wrapper')">
+                                    <a class="nav-link" href="/POS-BODYGYM/products">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Products</p>
                                     </a>

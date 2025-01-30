@@ -65,4 +65,106 @@ class ProductModel
             ];
         }
     }
+
+    public function updateProduct($productId, $productName, $categoryId, $priceId, $description, $status)
+    {
+        try {
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $query = "
+        UPDATE productos SET 
+        nombre_producto = :productName, 
+        catalago_productos = :categoryId, 
+        catalago_precio = :priceId, 
+        descripcion = :description,
+        activo = :status
+        WHERE id_producto = :productId";
+
+            $stmt = $conn->prepare($query);
+
+            $stmt->bindParam(':productId', $productId);
+            $stmt->bindParam(':productName', $productName);
+            $stmt->bindParam(':categoryId', $categoryId);
+            $stmt->bindParam(':priceId', $priceId);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':status', $status);
+
+            $stmt->execute();
+
+            return [
+                'success' => true,
+                'message' => 'Product was successfully updated'
+            ];
+        } catch (Exception $e) {
+            // Captura y muestra el error
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    public function deleteProduct($productId)
+    {
+        try {
+
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $query = "
+            DELETE FROM productos WHERE id_producto = :productId";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':productId', $productId);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return [
+                    'success' => true,
+                    'message' => 'Product deleted successfully'
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'Product not found or already deleted'
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    public function getProductById($producId)
+    {
+        try {
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $query = "
+            SELECT 
+                id_producto, 
+                nombre_producto, 
+                catalago_productos,
+                catalago_precio,
+                descripcion,
+                activo
+            FROM productos 
+            WHERE id_producto = :productId
+        ";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':productId', $producId);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
 }
