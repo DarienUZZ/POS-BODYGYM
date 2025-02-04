@@ -17,9 +17,9 @@ class PagesController
         include "view/products.php";
     }
 
-    public function addProducts()
+    public function inventory()
     {
-        include "view/addProducts.php";
+        include "view/inventory.php";
     }
 
     public function categories()

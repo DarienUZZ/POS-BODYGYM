@@ -21,7 +21,14 @@ class dashboardModel{
         $resultDailySales = $conn->query($queryDailySales);
         $data['dailySales'] = $resultDailySales->fetchColumn();
 
-        $queryLowStock = 'SELECT COUNT(*) AS lowStock FROM inventario WHERE cantidad < 8 AND activo = 1';
+        $queryLowStock = "
+        SELECT COUNT(*) AS lowStock 
+            FROM inventario i
+            INNER JOIN productos p ON i.productos_id = p.id_producto
+            INNER JOIN catalago_productos cp ON p.catalago_productos = cp.id_catalago_productos
+            WHERE i.cantidad < 8 
+            AND i.activo = 1
+            AND cp.id_catalago_productos <> 1";
         $resultLowStock = $conn->query($queryLowStock);
         $data['lowStockProducts'] = $resultLowStock->fetchColumn();
 

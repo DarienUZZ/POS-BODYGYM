@@ -39,6 +39,8 @@ $controller = new PagesController();
     <script src="view/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="view/assets/dist/js/adminlte.min.js"></script>
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -52,36 +54,36 @@ $controller = new PagesController();
         <!-- Content Wrapper -->
         <div class="content-wrapper">
             <?php
-        // Router básico
-        switch ($uri) {
-            case '/POS-BODYGYM/':
-                $controller->index();
-                break;
-            case '/POS-BODYGYM/products':
-                $controller->products();
-                break;
-            case '/POS-BODYGYM/addProducts':
-                $controller->addProducts();
-                break;
-            case '/POS-BODYGYM/categories':
-                $controller->categories();
-                break;
-            case '/POS-BODYGYM/prices':
-                $controller->prices();
-                break;
-            case '/POS-BODYGYM/sales':
-                $controller->sales();
-                break;
-            case '/POS-BODYGYM/users':
-                $controller->users();
-                break;
-            case '/POS-BODYGYM/logout':
-                $controller->logout();
-                break;
-            default:
-                $controller->error404();
-                break;
-        }
+            // Router básico
+            switch ($uri) {
+                case '/POS-BODYGYM/':
+                    $controller->index();
+                    break;
+                case '/POS-BODYGYM/products':
+                    $controller->products();
+                    break;
+                case '/POS-BODYGYM/inventory':
+                    $controller->inventory();
+                    break;
+                case '/POS-BODYGYM/categories':
+                    $controller->categories();
+                    break;
+                case '/POS-BODYGYM/prices':
+                    $controller->prices();
+                    break;
+                case '/POS-BODYGYM/sales':
+                    $controller->sales();
+                    break;
+                case '/POS-BODYGYM/users':
+                    $controller->users();
+                    break;
+                case '/POS-BODYGYM/logout':
+                    $controller->logout();
+                    break;
+                default:
+                    $controller->error404();
+                    break;
+            }
             ?>
 
         </div>
@@ -109,6 +111,7 @@ $controller = new PagesController();
     <!-- DataTables Scripts -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 </body>
 
 </html>

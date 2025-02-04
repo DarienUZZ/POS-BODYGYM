@@ -38,27 +38,22 @@ class ProductController
         return $this->productModel->getProducts();
     }
 
-    public function updateProducts($producData)
+    public function updateProducts($productData)
     {
-        if(
-            empty($producData['productId']) ||
-            empty($producData['productName']) ||
-            empty($producData['productCategory']) ||
-            empty($producData['productPrice'])
-        ) {
+        if (empty($productData['productId'])) {
             return [
                 'success' => false,
-               'message' => 'Todos los campos son requeridos'
+                'message' => 'El ID del producto es requerido'
             ];
         }
 
         $updateResult = $this->productModel->updateProduct(
-            $producData['productId'],
-            $producData['productName'],
-            $producData['productCategory'],
-            $producData['productPrice'],
-            $producData['productDescription']?? '',
-            $producData['productStatus']?? 1
+            $productData['productId'],
+            $productData['productName'],
+            $productData['productCategory'],
+            $productData['productPrice'],
+            $productData['productDescription']?? '',
+            $productData['productStatus']?? 1
         );
 
         if($updateResult['success']) {
@@ -84,4 +79,8 @@ class ProductController
     {
         return $this->productModel->getProductById($productId);
     }
+
+    // controller/products/productController.php
+
+
 }

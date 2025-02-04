@@ -32,7 +32,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/POS-BODYGYM/">
+                                    <a class="nav-link" href="/POS-BODYGYM/inventory">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Inventory</p>
                                     </a>

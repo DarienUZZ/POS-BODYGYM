@@ -69,6 +69,38 @@ body {
   background-color: #fff;
 }
 
+#inventoryBody {
+    max-height: 600px; /* Ajusta esta altura según necesites */
+    overflow-y: auto;
+    /* Estilos opcionales para mejorar la apariencia del scroll */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #888 #f1f1f1; /* Para Firefox */
+}
+
+/* Estilos para el scrollbar en navegadores WebKit (Chrome, Safari, etc.) */
+#inventoryBody::-webkit-scrollbar {
+    width: 6px;
+}
+
+#inventoryBody::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#inventoryBody::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#inventoryBody::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Para mantener el espaciado consistente */
+.inventory-summary:last-child {
+    margin-bottom: 0 !important;
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
@@ -222,7 +254,7 @@ caption {
 
 th {
   text-align: inherit;
-  text-align: -webkit-match-parent;
+  /text-align: -webkit-match-parent;
 }
 
 label {

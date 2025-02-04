@@ -1,26 +1,7 @@
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Inventory</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Products / Inventory</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content">
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col-12">
-                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addProductModal">
-                    <i class="fas fa-plus"></i> Add New Product
-                </button>
             </div>
         </div>
 
@@ -29,6 +10,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Products List</h3>
+                        <button type="button" class="btn bg-gray float-right" data-toggle="modal" data-target="#addProductModal">
+                            <i class="fas fa-plus"></i> Add New Product
+                        </button>
                     </div>
                     <div class="card-body">
                         <table id="productsTable" class="table table-bordered table-striped">
@@ -88,7 +72,6 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" form="addProductForm" class="btn btn-primary">Add Product</button>
             </div>
         </div>
@@ -109,18 +92,18 @@
                     <input type="hidden" id="editProductId" name="productId">
                     <div class="form-group">
                         <label for="editProductName">Product Name</label>
-                        <input type="text" class="form-control" id="editProductName" name="productName" required>
+                        <input type="text" class="form-control" id="editProductName" name="productName">
                     </div>
 
                     <div class="form-group">
                         <label for="editProductCategory">Category</label>
-                        <select class="form-control" id="editProductCategory" name="productCategory" required>
+                        <select class="form-control" id="editProductCategory" name="productCategory">
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="editProductPrice">Price</label>
-                        <select class="form-control" id="editProductPrice" name="productPrice" required>
+                        <select class="form-control" id="editProductPrice" name="productPrice">
                         </select>
                     </div>
 
@@ -131,7 +114,7 @@
 
                     <div class="form-group">
                         <label for="editProductStatus">Status</label>
-                        <select class="form-control" id="editProductStatus" name="productStatus" required>
+                        <select class="form-control" id="editProductStatus" name="productStatus">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
@@ -139,7 +122,6 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" form="editProductForm" class="btn btn-primary">Save Changes</button>
             </div>
         </div>
@@ -439,7 +421,7 @@
             const formData = new FormData(this);
 
             fetch('ajax/updateProducts.php', {
-                    method: 'UPDATE',
+                    method: 'POST',
                     body: formData
                 })
                 .then(response => {
@@ -491,6 +473,7 @@
         }
     }
 
-    // Llamar a la función updateProduct cuando el documento esté listo
-    updateProduct();
+    $(document).ready(function() {
+        updateProduct();
+    });
 </script>
