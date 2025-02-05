@@ -53,4 +53,41 @@ class InventoryController
             ];
         }
     }
+
+    public function updateInventoryRestock($restockData)
+    {
+        if (
+            empty($restockData['id_inventario']) ||
+            empty($restockData['quantity']) ||
+            empty($restockData['date']) ||
+            empty($restockData['time'])
+        ) {
+            return [
+                'success' => false,
+                'message' => 'Todos los campos son requeridos'
+            ];
+        }
+
+        $inventoryModel = new InventoryModel();
+        return $inventoryModel->updateInventoryRestock(
+            $restockData['id_inventario'],
+            $restockData['quantity'],
+            $restockData['date'],
+            $restockData['time']
+        );
+    }
+
+    public function deleteProduct($inventoryId)
+    {
+        if (empty($inventoryId)) {
+            return [
+                'success' => false,
+                'message' => 'ID del inventario no proporcionado'
+            ];
+        }
+
+        $inventoryModel = new InventoryModel();
+        return $inventoryModel->deleteProduct($inventoryId);
+    }
+    
 }

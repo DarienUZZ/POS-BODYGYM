@@ -4,7 +4,7 @@
             <div class="col-md-3 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Inventory</h5>
+                        <h5 class="card-title">Inventory Summary</h5>
                     </div>
                     <div class="card-body" id="inventoryBody">
                         <div class="row inventory-summary mb-3">
@@ -213,7 +213,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">Inventory details</h5>
-                        <button type="button" class="btn bg-gray float-right " data-toggle="modal" data-target="#registerRestockModal">
+                        <button type="button" class="btn bg-gray float-right " data-toggle="modal" data-target="#registerStockModal">
                             <i class="fas fa-plus"></i> Register stock
                         </button>
                         <button type="button" class="btn bg-blue float-right mr-2" data-toggle="modal" data-target="#registerRestockModal">
@@ -227,8 +227,7 @@
                                     <th>ID</th>
                                     <th>Product</th>
                                     <th>Quantity</th>
-                                    <th>Restock</th>
-                                    <th>Status</th>
+                                    <th>Restock date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -281,17 +280,17 @@
         margin-bottom: 0 !important;
     }
 </style> -->
-<div class="modal fade" id="registerRestockModal" tabindex="-1" role="dialog" aria-labelledby="registerRestockLabel" aria-hidden="true">
+<div class="modal fade" id="registerStockModal" tabindex="-1" role="dialog" aria-labelledby="registerStockLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="registerRestockLabel">Register stock</h5>
+                <h5 class="modal-title" id="registerStockLabel">Register stock</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="registerRestockForm" method="POST">
+                <form id="registerStockForm" method="POST">
                     <div class="form-group">
                         <label for="product">Product</label>
                         <select class="form-control selectpicker" name="product" id="productSearch" data-live-search="true" data-size="5">
@@ -316,6 +315,42 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="registerRestockModal" tabindex="-1" role="dialog" aria-labelledby="registerRestockLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerRestockLabel">Register Restock</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registerRestockForm" method="POST">
+                    <div class="form-group">
+                        <label for="inventorySelect">Inventory Item</label>
+                        <select class="form-control selectpicker" name="inventorySelect" id="inventorySelect" data-live-search="true" data-size="5">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="restockQuantity">Quantity</label>
+                        <input type="number" class="form-control" id="restockQuantity" name="restockQuantity"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="restockDate">Date</label>
+                        <input type="date" class="form-control" id="restockDate" name="restockDate"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="restockTime">Time</label>
+                        <input type="time" class="form-control" id="restockTime" name="restockTime"></input>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-Restock btn btn-primary">Restock</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         $('#inventoryTable').DataTable({
@@ -333,24 +368,16 @@
                     "data": "quantity"
                 },
                 {
-                    data: 'status',
-                    render: function(data) {
-                        return data == 1 ?
-                            '<span class="badge badge-success">Active</span>' :
-                            '<span class="badge badge-danger">Inactive</span>';
-                    }
-                },
-                {
                     "data": "restock"
                 },
                 {
                     data: null,
                     render: function(data) {
                         return `
-            <button class="btn btn-sm" onclick="openEditModal(${data.id_producto})">
+            <button class="btn btn-sm" onclick="openEditModal(${data.id})">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm " onclick="deleteProduct(${data.id_producto})">
+                            <button class="btn btn-sm " onclick="deleteInventory(${data.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         `;
@@ -367,7 +394,7 @@
         $('#productSearch').selectpicker();
 
         // Cargar productos cuando se abra el modal
-        $('#registerRestockModal').on('show.bs.modal', function() {
+        $('#registerStockModal').on('show.bs.modal', function() {
             $.ajax({
                 url: 'ajax/searchProducts.php',
                 method: 'GET',
@@ -396,13 +423,13 @@
         });
 
         // Limpiar el select cuando se cierre el modal
-        $('#registerRestockModal').on('hidden.bs.modal', function() {
+        $('#registerStockModal').on('hidden.bs.modal', function() {
             $('#productSearch').val(null).selectpicker('refresh');
         });
     });
 
     $(document).ready(function() {
-        $('#registerRestockForm').on('submit', function(e) {
+        $('#registerStockForm').on('submit', function(e) {
             e.preventDefault();
 
             // Obtener los valores del formulario
@@ -432,7 +459,7 @@
                 success: function(response) {
                     if (response.success) {
                         alert('Restock registrado correctamente.');
-                        $('#registerRestockModal').modal('hide');
+                        $('#registerStockModal').modal('hide');
                         $('#inventoryTable').DataTable().ajax.reload();
                     } else {
                         alert(response.message);
@@ -443,10 +470,108 @@
                 }
             })
 
-            $('#registerRestockForm').on('hiden.bs.modal', function(e) {
-                $('#registerRestockForm')[0].reset();
+            $('#registerStockForm').on('hiden.bs.modal', function(e) {
+                $('#registerStockForm')[0].reset();
             })
 
         })
     });
+
+    $(document).ready(function() {
+        // Cargar items de inventario cuando se abra el modal
+        $('#registerRestockModal').on('show.bs.modal', function() {
+            $.ajax({
+                url: 'ajax/getInventory.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#inventorySelect').empty();
+                    data.forEach(function(item) {
+                        $('#inventorySelect').append(
+                            $('<option>', {
+                                value: item.id,
+                                text: `${item.product} (Current: ${item.quantity})`
+                            })
+                        );
+                    });
+                    $('#inventorySelect').selectpicker('refresh');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar los items de inventario:', error);
+                }
+            });
+        });
+
+        // Manejar el submit del formulario de restock
+        $('.btn-Restock').on('click', function(e) {
+            e.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+            var inventoryId = $('#inventorySelect').val();
+            var quantity = $('#restockQuantity').val();
+            var date = $('#restockDate').val();
+            var time = $('#restockTime').val();
+
+            alert(`Data: ${inventoryId}, ${quantity}, ${date}, ${time}`); // Mostrar valores en una alerta
+
+            // Validación básica
+            if (!inventoryId || !quantity || !date || !time) {
+                alert('Todos los campos son obligatorios.');
+                return;
+            }
+
+            var formData = {
+                id_inventario: inventoryId,
+                quantity: quantity,
+                date: date,
+                time: time
+            };
+
+            $.ajax({
+                url: 'ajax/updateRestock.php',
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        alert('Restock registrado correctamente.');
+                        $('#registerRestockModal').modal('hide');
+                        $('#inventoryTable').DataTable().ajax.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al registrar el restock:', error);
+                }
+            });
+        });
+
+
+        // Limpiar formulario al cerrar
+        $('#registerRestockModal').on('hidden.bs.modal', function() {
+            $('#registerRestockForm')[0].reset();
+            $('#inventorySelect').selectpicker('refresh');
+        });
+    });
+
+    function deleteInventory(idInventory) {
+        if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+            fetch(`ajax/deleteInventory.php?id=${idInventory}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#inventoryTable').DataTable().ajax.reload(); // Recargar la tabla
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al eliminar el registro. Por favor, intenta de nuevo.');
+                });
+        }
+    }
 </script>

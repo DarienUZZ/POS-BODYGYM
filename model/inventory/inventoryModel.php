@@ -40,16 +40,30 @@ class inventoryModel
 
     public function insertInventory($productId, $quantity, $date, $time)
     {
-        try{
+        try {
             $db = new database();
             $conn = $db->getConnection();
 
             $fechaRestock = $date . ' ' . $time;
 
+            $checkQuery = "SELECT COUNT(*) FROM inventario WHERE productos_id = :productId";
+            $checkStmt = $conn->prepare($checkQuery);
+            $checkStmt->bindParam(':productId', $productId);
+            $checkStmt->execute();
+            $productExists = $checkStmt->fetchColumn(); // Retorna el número de filas encontradas
+
+            if ($productExists > 0) {
+                return [
+                    'success' => false,
+                    'message' => 'El producto ya está registrado en el inventario.'
+                ];
+            }
+
+            // Si no existe, procede con el INSERT
             $query = "
             INSERT INTO inventario (productos_id, cantidad, activo, fecha_restock)
             VALUES (:productId, :quantity, 1, :fechaRestock)";
-            
+
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':productId', $productId);
             $stmt->bindParam(':quantity', $quantity);
@@ -57,17 +71,17 @@ class inventoryModel
             $stmt->execute();
 
             return [
-               'success' => true,
-               'message' => 'Inventario agregado correctamente'
+                'success' => true,
+                'message' => 'Inventario agregado correctamente'
             ];
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return [
                 'success' => false,
-               'message' => 'Error: '. $e->getMessage()
+                'message' => 'Error: ' . $e->getMessage()
             ];
         }
     }
-    // funcion para eidtar el inventario que lo unico que edite sea la cantidad y la fecha, no dejar editar el nombre ni status
+
     public function getProducts()
     {
         try {
@@ -75,11 +89,11 @@ class inventoryModel
             $conn = $db->getConnection();
 
             $query = "
-        SELECT p.id_producto, p.nombre_producto
-        FROM productos p
-        JOIN catalago_productos cp ON p.catalago_productos = cp.id_catalago_productos
-        WHERE p.activo = 1 AND cp.id_catalago_productos <> 1
-        "; // Ajusta la consulta según tu estructura
+            SELECT p.id_producto, p.nombre_producto
+            FROM productos p
+            JOIN catalago_productos cp ON p.catalago_productos = cp.id_catalago_productos
+            WHERE p.activo = 1 AND cp.id_catalago_productos <> 1
+            "; 
 
             $stmt = $conn->prepare($query);
             $stmt->execute();
@@ -91,6 +105,62 @@ class inventoryModel
             ];
         }
     }
+
+    public function updateInventoryRestock($id_inventario, $quantity, $date, $time)
+    {
+        try {
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $fechaRestock = $date . ' ' . $time;
+
+            $query = "
+            UPDATE inventario 
+            SET cantidad = cantidad + :quantity, 
+                fecha_restock = :fechaRestock
+            WHERE id_inventario = :id_inventario";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':quantity', $quantity);
+            $stmt->bindParam(':fechaRestock', $fechaRestock);
+            $stmt->bindParam(':id_inventario', $id_inventario);
+            $stmt->execute();
+
+            return [
+                'success' => true,
+                'message' => 'Inventario actualizado correctamente'
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
+    public function deleteProduct($id_inventario)
+    {
+        try {
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $query = "DELETE FROM inventario WHERE id_inventario = :id_inventario";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':id_inventario', $id_inventario);
+            $stmt->execute();
+
+            return [
+                'success' => true,
+                'message' => 'Registro eliminado correctamente'
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    
 
 }
 

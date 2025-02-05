@@ -10,6 +10,7 @@ class ProductModel
             $db = new database();
             $conn = $db->getConnection();
 
+
             $query = "INSERT INTO productos (nombre_producto, catalago_productos, catalago_precio, descripcion, activo) 
         VALUES (:productName, :categoryId, :priceId, :description, 1)";
 
