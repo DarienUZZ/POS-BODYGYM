@@ -1,224 +1,24 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-md-3 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Inventory Summary</h5>
+                        <h5 class="card-title1">Inventory Summary</h5>
                     </div>
-                    <div class="card-body" id="inventoryBody">
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
+                    <div class="card-body" style="max-height: 735px; overflow-y: auto;">
+                        <div class="inventorySummaryCards" id="inventorySummaryCards">
 
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
-                        </div>
-                        <div class="row inventory-summary mb-3">
-                            <div class="col-2">
-                                <div class="icon">
-                                    <i class="fas fa-box"></i> <!-- Icono de FontAwesome -->
-                                </div>
-                            </div>
-                            <div class="col-8">
-
-                                <div class="details">
-                                    <div class="name">Producto</div>
-                                </div>
-                                <div class="description" style="font-size:0.6rem;">Descripción</div>
-                            </div>
-                            <div class="col-2">
-
-                                <div class="quantity">10</div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-9 mt-3">
+            <div class="col mt-3">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">Inventory details</h5>
-                        <button type="button" class="btn bg-gray float-right " data-toggle="modal" data-target="#registerStockModal">
-                            <i class="fas fa-plus"></i> Register stock
-                        </button>
-                        <button type="button" class="btn bg-blue float-right mr-2" data-toggle="modal" data-target="#registerRestockModal">
-                            <i class="fas fa-plus"></i> Register restock
-                        </button>
                     </div>
                     <div class="card-body">
                         <table id="inventoryTable" class="table table-bordered table-hover">
@@ -228,6 +28,7 @@
                                     <th>Product</th>
                                     <th>Quantity</th>
                                     <th>Restock date</th>
+                                    <th>Restock time</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -354,6 +155,11 @@
 <script>
     $(document).ready(function() {
         $('#inventoryTable').DataTable({
+            lengthChange: false,
+            language: {
+                search: "",
+                searchPlaceholder: "Search inventory items..."
+            },
             ajax: {
                 url: "ajax/getInventory.php",
                 dataSrc: ''
@@ -368,15 +174,15 @@
                     "data": "quantity"
                 },
                 {
-                    "data": "restock"
+                    "data": "restock_date"
+                },
+                {
+                    "data": "restock_time"
                 },
                 {
                     data: null,
                     render: function(data) {
                         return `
-            <button class="btn btn-sm" onclick="openEditModal(${data.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
                             <button class="btn btn-sm " onclick="deleteInventory(${data.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
@@ -386,6 +192,21 @@
             ],
             responsive: true,
             autoWidth: false,
+            dom: '<"row"<"col-sm-0"f><"col text-right"B>><"row"<"col-sm-12"tr>><"row"<"col-sm-5"i><"col-sm-7"p>>',
+            buttons: [{
+                text: '<i class="fas fa-plus"></i> Register Stock',
+                className: 'btn bg-gray',
+                action: function(e, dt, node, config) {
+                    $('#registerStockModal').modal('show');
+                }
+            }, {
+                text: '<i class="fas fa-plus"></i> Register Restock',
+                className: ' ml-3 btn bg-gray',
+                action: function(e, dt, node, config) {
+                    $('#registerStockModal').modal('show');
+                }
+            }],
+            pageLength: 10,
         });
     });
 
@@ -527,7 +348,7 @@
             };
 
             $.ajax({
-                url: 'ajax/updateRestock.php',
+                url: 'ajax/inventoryRestock.php',
                 method: 'POST',
                 data: formData,
                 dataType: 'json',
@@ -574,4 +395,33 @@
                 });
         }
     }
+
+    $(document).ready(function() {
+        $.ajax({
+            url: "ajax/getInventorySummary.php",
+            method: "GET",
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    let html = '';
+                    response.data.forEach(function(item) { // Accede a response.data
+                        html += `
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h6 class="card-title">${item.product}</h6>
+                                <p class="card-text">Quantity: ${item.total_quantity}</p>
+                            </div>
+                        </div>
+                    `;
+                    });
+                    $('#inventorySummaryCards').html(html);
+                } else {
+                    console.error('Error:', response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar el resumen de inventario:', error);
+            }
+        });
+    });
 </script>

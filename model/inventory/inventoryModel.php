@@ -19,7 +19,8 @@ class inventoryModel
                 p.nombre_producto AS product,
                 i.cantidad AS quantity,
                 i.activo AS status,
-                i.fecha_restock AS restock
+                DATE(i.fecha_restock) AS restock_date,
+                TIME(i.fecha_restock) AS restock_time
             FROM inventario i
             JOIN productos p ON i.productos_id = p.id_producto
             JOIN catalago_productos cp ON p.catalago_productos = cp.id_catalago_productos
@@ -106,7 +107,7 @@ class inventoryModel
         }
     }
 
-    public function updateInventoryRestock($id_inventario, $quantity, $date, $time)
+    public function InventoryRestock($id_inventario, $quantity, $date, $time)
     {
         try {
             $db = new database();
@@ -160,6 +161,35 @@ class inventoryModel
         }
     }
 
+    public function getInventorySummary()
+    {
+        try
+        {
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $query = "
+            SELECT
+            p.nombre_producto AS product,
+            SUM(i.cantidad) AS total_quantity
+            FROM inventario i
+            JOIN productos p ON i.productos_id = p.id_producto
+            JOIN catalago_productos cp ON p.catalago_productos = cp.id_catalago_productos
+            WHERE cp.id_catalago_productos <> 1
+            GROUP BY p.nombre_producto";
+
+            $stmt = $conn->query($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(Exception $e){
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+
+
+    }
     
 
 }

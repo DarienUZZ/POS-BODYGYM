@@ -54,7 +54,7 @@ class InventoryController
         }
     }
 
-    public function updateInventoryRestock($restockData)
+    public function InventoryRestock($restockData)
     {
         if (
             empty($restockData['id_inventario']) ||
@@ -69,7 +69,7 @@ class InventoryController
         }
 
         $inventoryModel = new InventoryModel();
-        return $inventoryModel->updateInventoryRestock(
+        return $inventoryModel->InventoryRestock(
             $restockData['id_inventario'],
             $restockData['quantity'],
             $restockData['date'],
@@ -88,6 +88,24 @@ class InventoryController
 
         $inventoryModel = new InventoryModel();
         return $inventoryModel->deleteProduct($inventoryId);
+    }
+
+    public function getInventorySummary()
+    {
+        $inventoryModel = new InventoryModel();
+        $inventorySummary = $inventoryModel->getInventorySummary();
+
+        if ($inventorySummary) {
+            return [
+                'success' => true,
+                'data' => $inventorySummary
+            ];
+        } else {
+            return [
+                'success' => false,
+                'message' => 'No se encontraron productos'
+            ];
+        }
     }
     
 }

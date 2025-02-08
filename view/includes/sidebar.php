@@ -44,7 +44,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a style="cursor: pointer;" class="nav-link" onclick="loadContent('view/categories.php', 'content-wrapper')">
+                                    <a style="cursor: pointer;" class="nav-link" href="/POS-BODYGYM/categories">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Categories</p>
                                     </a>

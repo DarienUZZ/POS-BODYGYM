@@ -1,25 +1,18 @@
 <div class="content">
     <div class="container-fluid">
-        <div class="row mb-3">
-            <div class="col-12">
-            </div>
-        </div>
-
         <div class="row">
-            <div class="col-12">
-                <div class="card">
+
+            <div class="col-md-12">
+                <div class="card mt-3">
                     <div class="card-header">
                         <h3 class="card-title">Products List</h3>
-                        <button type="button" class="btn bg-gray float-right" data-toggle="modal" data-target="#addProductModal">
-                            <i class="fas fa-plus"></i> Add New Product
-                        </button>
                     </div>
                     <div class="card-body">
                         <table id="productsTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Product Name</th>
+                                    <th>Product</th>
                                     <th>Category</th>
                                     <th>Price</th>
                                     <th>Description</th>
@@ -28,17 +21,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- Aquí irían los datos de la tabla de productos -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
 <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-ml" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
@@ -79,7 +74,7 @@
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true" id="editProductModal">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-ml" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editProductModal">Edit Product</h5>
@@ -129,13 +124,17 @@
 </div>
 
 
+
 <script>
     $(document).ready(function() {
         // Inicializar DataTables
         $('#productsTable').DataTable({
+            lengthChange: false,
+            info: false,
             ajax: {
                 url: 'ajax/getProducts.php',
-                dataSrc: ''
+                dataSrc: '',
+
             },
             columns: [{
                     data: 'id_producto'
@@ -174,11 +173,41 @@
                     }
                 }
             ],
-            responsive: true,
+            responsive: {
+                details: {
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function(row) {
+                            var data = row.data();
+                            return 'Inventory details'
+                        }
+                    }),
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                        tableClass: 'table'
+                    })
+                }
+            },
             autoWidth: false,
+            language: {
+                search: "",
+                searchPlaceholder: "Search products...",
+                paginate: {
+                    first: 'First',
+                    last: 'Last',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    previous: '<i class="fas fa-angle-left"></i'
+                }
+            },
+            dom: '<"row"<"col-sm-0"f><"col text-right"B>><"row"<"col-sm-12"tr>><"row"<"col-sm-5"i><"col-sm-7"p>>',
+            buttons: [{
+                text: '<i class="fas fa-plus"></i> Add New Category',
+                className: 'btn bg-blue',
+                action: function(e, dt, node, config) {
+                    $('#addProductModal').modal('show');
+                }
+            }],
+            pageLength: 10, // Default number of entries
         });
     });
-
 
     $(document).ready(function() {
 
@@ -347,40 +376,6 @@
                     alert('Error al guardar el producto. Por favor, intenta de nuevo.');
                 });
         });
-
-        // document.getElementById('addProductForm').addEventListener('submit', function(event) {
-        //     event.preventDefault();
-
-        //     const formData = new FormData(this);
-
-        //     fetch('ajax/addProducts.php', {
-        //             method: 'POST',
-        //             body: formData
-        //         })
-        //         .then(response => {
-        //             if (!response.ok) {
-        //                 throw new Error('La respuesta de red no fue correcta');
-        //             }
-        //             return response.json();
-        //         })
-        //         .then(data => {
-        //             if (data.success) {
-        //                 alert(data.message);
-        //                 this.reset();
-        //                 loadCategories();
-        //                 loadPrices();
-
-
-        //             } else {
-        //                 alert(data.message);
-
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('Error:', error);
-        //             alert('Error al guardar el producto. Por favor, intenta de nuevo.');
-        //         });
-        // });
     }
 
     // Función para abrir el modal de edición y cargar los datos del producto
