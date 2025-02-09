@@ -69,7 +69,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="/POS-BODYGYM/inventory" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -126,14 +126,29 @@
                 const salesChart = new Chart(document.getElementById("salesChart"), {
                     type: "line",
                     data: {
-                        labels: data.sales.labels, // ["Lunes", "Martes", "Miércoles", ...]
+                        labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"], // Días de la semana
                         datasets: [{
-                            label: "Ventas", ""
-                            data: data.sales.values, // [100, 200, 150, ...]
-                            backgroundColor: "rgba(0, 123, 255, 0.5)",
-                            borderColor: "rgba(0, 123, 255, 1)",
-                            borderWidth: 2
-                        }]
+                                label: "Card",
+                                backgroundColor: "rgba(54, 162, 235, 0.5)",
+                                borderColor: "rgba(54, 162, 235, 1)",
+                                borderWidth: 1,
+                                data: data.card // Datos de pagos con tarjeta
+                            },
+                            {
+                                label: "Sinpe",
+                                backgroundColor: "rgba(75, 192, 192, 0.5)",
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                borderWidth: 1,
+                                data: data.sinpe // Datos de pagos con Sinpe
+                            },
+                            {
+                                label: "Cash",
+                                backgroundColor: "rgba(255, 206, 86, 0.5)",
+                                borderColor: "rgba(255, 206, 86, 1)",
+                                borderWidth: 1,
+                                data: data.cash // Datos de pagos en efectivo
+                            }
+                        ]
                     },
                     options: {
                         responsive: true,
