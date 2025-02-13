@@ -1,15 +1,19 @@
 <?php
 
-class database
-{
-    static public function getConnection()
-    {
-
+class Database {
+    static public function getConnection() {
         try {
-            $conn = new PDO("mysql:host=localhost;dbname=POS", "root", "");
+            // Formato correcto de conexión PDO para PostgreSQL
+            $conn = new PDO(
+                "pgsql:host=db.ohogktxghvemptcfofvx.supabase.co;port=5432;dbname=postgres",
+                "postgres",
+                "vdn9U9OFJ5ok4GSW",
+                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            );
             return $conn;
-        } catch (Exception $e) {
-            echo "Connection failed: " . $e->getMessage();
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+            return null;
         }
     }
 }
