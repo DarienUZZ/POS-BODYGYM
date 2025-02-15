@@ -1,5 +1,5 @@
 <?php
-require_once '../controller/inventory/inventoryController.php';
+require_once __DIR__ . '/../../controller/inventory/inventoryController.php';
 
 
 $data = $_POST;

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/dbo.php';
+require_once __DIR__ . '/../../model/dbo.php';
 
 class CategoryModel
 {
@@ -88,6 +88,32 @@ class CategoryModel
             return [
                 'success' => false,
                'message' => 'Error: '. $e->getMessage()
+            ];
+        }
+    }
+
+    public function addCategoryMethodPayment($methodPayment)
+    {
+        try {
+            $db = new database();
+            $conn = $db->getConnection();
+
+            $query = "
+        INSERT INTO metodo_pago
+        (descripcion, activo) 
+        VALUES (:methodPayment, 1)";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':methodPayment', $methodPayment);
+            $stmt->execute();
+            return [
+                'success' => true,
+                'message' => 'Method added successfully'
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
             ];
         }
     }

@@ -126,6 +126,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addMethodPaymentModalLabel" aria-hidden="true" id="addMethodPaymentModal">
+    <div class="modal-dialog modal-ml" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body px-4">
+                <h4 class="mb-2">Add New Method Payment</h4>
+                <p class="text-muted mb-4">Create a new category to organize and classify your products in the catalog.</p>
+
+                <form id="addMethodPaymentForm" method="POST">
+                    <div class="form-group mb-4">
+                        <label class="form-label mb-2" for="PricesName">Method name</label>
+                        <input type="text" class="form-control mb-3" id="addMethodPayment" name="addMethodPayment" placeholder="Enter new price">
+                        <button type="submit" class="btnAddMethodPayment btn btn-primary w-100">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         // Inicializar DataTables
@@ -138,7 +161,7 @@
             },
 
             ajax: {
-                url: 'ajax/getCatalogsProducts.php',
+                url: 'ajax/ajaxCategory/getCatalogsProducts.php',
                 dataSrc: '',
 
             },
@@ -188,7 +211,7 @@
             info: false,
 
             ajax: {
-                url: 'ajax/getCatalogsPrice.php',
+                url: 'ajax/ajaxCategory/getCatalogsPrice.php',
                 dataSrc: '',
 
             },
@@ -237,7 +260,7 @@
             },
 
             ajax: {
-                url: 'ajax/getCategoryPayment.php',
+                url: 'ajax/ajaxCategory/getCategoryPayment.php',
                 dataSrc: '',
 
             },
@@ -252,10 +275,10 @@
                     data: null,
                     render: function(data) {
                         return `
-                 <button class="btn btn-sm" (${data.id_catalago_productos})">
+                 <button class="btn btn-sm" (${data.id_metodo_pago})">
                                      <i class="fas fa-edit"></i>
                                  </button>
-                                 <button class="btn btn-sm "(${data.id_catalago_productos})">
+                                 <button class="btn btn-sm "(${data.id_metodo_pago})">
                                      <i class="fas fa-trash"></i>
                                  </button>
                              `;
@@ -270,7 +293,7 @@
                 text: '<i class="fas fa-plus"></i> Add New Method',
                 className: 'btn bg-gray',
                 action: function(e, dt, node, config) {
-                    $('#addCategoryProductModal').modal('show');
+                    $('#addMethodPaymentModal').modal('show');
                 }
             }]
 
@@ -288,7 +311,7 @@
             }
 
             $.ajax({
-                url: 'ajax/addCategoryProduct.php',
+                url: 'ajax/ajaxCategory/addCategoryProduct.php',
                 method: 'POST',
                 data: {
                     categoryName: categoryName
@@ -299,6 +322,7 @@
                         alert('Categoría agregada correctamente.');
                         $('#addCategoryProductModal').modal('hide'); // Cerrar 
                         $('#addCategoryProductForm')[0].reset(); // Limpiar
+                        $('#productCatalogTable').DataTable().ajax.reload();
                     } else {
                         alert('Error: ' + response.message);
                     }
@@ -322,7 +346,7 @@
             }
 
             $.ajax({
-                url: 'ajax/addCategoryPrice.php',
+                url: 'ajax/ajaxCategory/addCategoryPrice.php',
                 method: 'POST',
                 data: {
                     price: price
@@ -333,6 +357,42 @@
                         alert('Nuevo Precio agregado correctamente.');
                         $('#addPriceProductModal').modal('hide'); // Cerrar 
                         $('#addPriceProductForm')[0].reset(); // Limpiar
+                        $('#priceCatalogTable').DataTable().ajax.reload();
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al agregar el precio:', error);
+                    alert('Error al agregar el precio. Por favor, intenta de nuevo.');
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+        $('.btnAddMethodPayment').on('click', function(e) {
+            e.preventDefault();
+
+            const methodPayment = $('#addMethodPayment').val();
+
+            if (!methodPayment) {
+                alert('El nombre de es requerido.');
+                return;
+            }
+
+            $.ajax({
+                url: 'ajax/ajaxCategory/addCategoryPayment.php',
+                method: 'POST',
+                data: {
+                    methodPayment: methodPayment
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        alert('New method payment.');
+                        $('#addMethodPaymentModal').modal('hide'); // Cerrar 
+                        $('#addMethodPaymentForm')[0].reset(); // Limpiar
+                        $('#methodPaymentCatalogTable').DataTable().ajax.reload();
                     } else {
                         alert('Error: ' + response.message);
                     }

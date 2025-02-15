@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/inventory/inventoryModel.php';
+require_once __DIR__ . '/../../model/inventory/inventoryModel.php';
 
 class InventoryController
 {

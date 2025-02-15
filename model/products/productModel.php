@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/dbo.php';
+require_once __DIR__ . '/../../model/dbo.php';
 
 class ProductModel
 {

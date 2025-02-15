@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/products/CategoryModel.php';
+require_once __DIR__ . '/../../model/products/CategoryModel.php';
 
 class CategoryController{
 
@@ -30,5 +30,11 @@ class CategoryController{
     {
         $categoryModel = new CategoryModel();
         return $categoryModel->getCategoryMethodPayment();
+    }
+
+    public function addCategoryMethodPayment($methodPayment)
+    {
+        $categoryModel = new CategoryModel();
+        return $categoryModel->addCategoryMethodPayment($methodPayment);
     }
 }

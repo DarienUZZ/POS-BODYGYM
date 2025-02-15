@@ -1,21 +1,21 @@
 <?php
-require_once '../controller/products/catalogsController.php';
+require_once __DIR__ . '/../../controller/products/catalogsController.php';
 
 // Obtener los datos del formulario
-$price = $_POST['price'] ?? '';
+$methodPayment = $_POST['methodPayment'] ?? '';
 
 // Validar que el nombre de la categoría no esté vacío
-if (empty($price)) {
+if (empty($methodPayment)) {
     echo json_encode([
         'success' => false,
-        'message' => 'El nombre de la categoría es requerido.'
+        'message' => 'El nombre de la metodo es requerido.'
     ]);
     exit;
 }
 
 // Llamar al controlador para agregar la categoría
 $controller = new CategoryController();
-$result = $controller->addCategoryPrice($price);
+$result = $controller->addCategoryMethodPayment($methodPayment);
 
 // Devolver la respuesta en formato JSON
 header('Content-Type: application/json');

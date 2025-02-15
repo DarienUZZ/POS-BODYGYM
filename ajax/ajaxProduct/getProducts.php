@@ -1,6 +1,6 @@
 <?php
 
-require_once '../controller/products/productController.php';
+require_once __DIR__ . '/../../controller/products/productController.php';
 
 $products = new ProductController();
 $productData = $products->getProducts();

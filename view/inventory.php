@@ -161,7 +161,7 @@
                 searchPlaceholder: "Search inventory items..."
             },
             ajax: {
-                url: "ajax/getInventory.php",
+                url: "ajax/ajaxInventory/getInventory.php",
                 dataSrc: ''
             },
             "columns": [{
@@ -201,9 +201,9 @@
                 }
             }, {
                 text: '<i class="fas fa-plus"></i> Register Restock',
-                className: ' ml-3 btn bg-gray',
+                className: ' ml-3 btn bg-green',
                 action: function(e, dt, node, config) {
-                    $('#registerStockModal').modal('show');
+                    $('#registerRestockModal').modal('show');
                 }
             }],
             pageLength: 10,
@@ -217,7 +217,7 @@
         // Cargar productos cuando se abra el modal
         $('#registerStockModal').on('show.bs.modal', function() {
             $.ajax({
-                url: 'ajax/searchProducts.php',
+                url: 'ajax/ajaxProduct/searchProducts.php',
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -273,7 +273,7 @@
             };
 
             $.ajax({
-                url: 'ajax/addInventory.php',
+                url: 'ajax/ajaxInventory/addInventory.php',
                 method: 'POST',
                 data: formData,
                 dataType: 'json',
@@ -302,7 +302,7 @@
         // Cargar items de inventario cuando se abra el modal
         $('#registerRestockModal').on('show.bs.modal', function() {
             $.ajax({
-                url: 'ajax/getInventory.php',
+                url: 'ajax/ajaxInventory/getInventory.php',
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -377,7 +377,7 @@
 
     function deleteInventory(idInventory) {
         if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
-            fetch(`ajax/deleteInventory.php?id=${idInventory}`, {
+            fetch(`ajax/ajaxInventory/deleteInventory.php?id=${idInventory}`, {
                     method: 'DELETE'
                 })
                 .then(response => response.json())
@@ -398,7 +398,7 @@
 
     $(document).ready(function() {
         $.ajax({
-            url: "ajax/getInventorySummary.php",
+            url: "ajax/ajaxInventory/getInventorySummary.php",
             method: "GET",
             dataType: "json",
             success: function(response) {

@@ -132,7 +132,7 @@
             lengthChange: false,
             info: false,
             ajax: {
-                url: 'ajax/getProducts.php',
+                url: 'ajax/ajaxProduct/getProducts.php',
                 dataSrc: '',
 
             },
@@ -199,7 +199,7 @@
             },
             dom: '<"row"<"col-sm-0"f><"col text-right"B>><"row"<"col-sm-12"tr>><"row"<"col-sm-5"i><"col-sm-7"p>>',
             buttons: [{
-                text: '<i class="fas fa-plus"></i> Add New Category',
+                text: '<i class="fas fa-plus"></i> Add New Product',
                 className: 'btn bg-blue',
                 action: function(e, dt, node, config) {
                     $('#addProductModal').modal('show');
@@ -220,7 +220,7 @@
     });
 
     function loadCategories() {
-        fetch('ajax/getCatalogsProducts.php')
+        fetch('ajax/ajaxCategory/getCatalogsProducts.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('La respuesta de red no fue correcta');
@@ -250,7 +250,7 @@
     }
 
     function loadPrices() {
-        fetch('ajax/getCatalogsPrice.php')
+        fetch('ajax/ajaxCategory/getCatalogsPrice.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('La respuesta de red no fue correcta');
@@ -280,7 +280,7 @@
     }
 
     function loadCategories2(selectId = 'productCategory', selectedValue = null) {
-        fetch('ajax/getCatalogsProducts.php')
+        fetch('ajax/ajaxCategory/getCatalogsProducts.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('La respuesta de red no fue correcta');
@@ -313,7 +313,7 @@
     }
 
     function loadPrices2(selectId = 'productPrice', selectedValue = null) {
-        fetch('ajax/getCatalogsPrice.php')
+        fetch('ajax/ajaxCategory/getCatalogsPrice.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('La respuesta de red no fue correcta');
@@ -351,7 +351,7 @@
 
             const formData = new FormData(this);
 
-            fetch('ajax/addProducts.php', {
+            fetch('ajax/ajaxProduct/addProducts.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -381,7 +381,7 @@
     // Función para abrir el modal de edición y cargar los datos del producto
     function openEditModal(productId) {
 
-        fetch(`ajax/getProductById.php?id=${productId}`)
+        fetch(`ajax/ajaxProduct/getProductById.php?id=${productId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('La respuesta de red no fue correcta');
@@ -415,7 +415,7 @@
 
             const formData = new FormData(this);
 
-            fetch('ajax/updateProducts.php', {
+            fetch('ajax/ajaxProduct/updateProducts.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -444,7 +444,7 @@
 
     function deleteProduct(productId) {
         if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-            fetch(`ajax/deleteProduct.php?id=${productId}`, {
+            fetch(`ajax/ajaxProduct/deleteProduct.php?id=${productId}`, {
                     method: 'DELETE'
                 })
                 .then(response => {

@@ -1,11 +1,11 @@
 <?php
-require_once '../controller/products/catalogsController.php';
+require_once __DIR__ . '/../../controller/products/catalogsController.php';
 
 // Obtener los datos del formulario
-$categoryName = $_POST['categoryName'] ?? '';
+$price = $_POST['price'] ?? '';
 
 // Validar que el nombre de la categoría no esté vacío
-if (empty($categoryName)) {
+if (empty($price)) {
     echo json_encode([
         'success' => false,
         'message' => 'El nombre de la categoría es requerido.'
@@ -15,7 +15,7 @@ if (empty($categoryName)) {
 
 // Llamar al controlador para agregar la categoría
 $controller = new CategoryController();
-$result = $controller->addCategoryProduct($categoryName);
+$result = $controller->addCategoryPrice($price);
 
 // Devolver la respuesta en formato JSON
 header('Content-Type: application/json');
