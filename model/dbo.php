@@ -1,14 +1,21 @@
 <?php
-
-class Database {
-    static public function getConnection() {
+class Database
+{
+    static public function getConnection()
+    {
         try {
-            $host = "db-pos.chc4tcuu6szl.us-east-1.rds.amazonaws.com";
-            $port = "3306";
-            $dbname = "db_pos_system";
-            $user = "supadmin";
-            $pass = "sT^FE5Ns0ih7OQ+n";
-            $conn = new PDO("mysql:host=$host;dbname=$dbname",$user,$pass,);
+            $host = 'aws-0-us-west-1.pooler.supabase.com';
+            $port = '6543';
+            $dbname = 'postgres';
+            $user = 'postgres.ohogktxghvemptcfofvx';
+            $password = 'T6hKEkw59ekcBs2q'; // reemplazar si cambiaste la contraseña
+
+            $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+            $conn = new PDO($dsn, $user, $password);
+
+            // Opcional: establecer modo de errores
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             return $conn;
         } catch (PDOException $e) {
             echo "Error de conexión: " . $e->getMessage();

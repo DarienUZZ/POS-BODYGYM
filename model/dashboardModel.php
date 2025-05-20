@@ -1,40 +1,38 @@
 <?php
+require_once 'dbo.php';
 
-require_once '../model/dbo.php';
-
-class dashboardModel{
-
-    static public function fetchDashboardData() {
-
-        $db = new database();
+class DashboardModel
+{
+    static public function fetchDashboardData()
+    {
+        $db = new Database();
         $conn = $db->getConnection();
 
         $data = [];
 
-        // Total de productos
-        $queryProducts = "SELECT COUNT(*) AS totalProducts FROM productos WHERE activo = 1";
-        $resultProducts = $conn->query($queryProducts);
-        $data['totalProducts'] = $resultProducts->fetchColumn();
+        // Total de productos (adaptado para Supabase)
+        $productsData = $db->executeQuery('productos', [
+            'select' => ['count' => 'exact'],
+            'eq' => ['activo', 1]
+        ]);
+        $data['totalProducts'] = $productsData ? count($productsData) : 0;
 
-        // Ventas diarias
-        $queryDailySales = 'SELECT COUNT(*) AS totalSales FROM factura WHERE DATE(fecha) = CURDATE()';
-        $resultDailySales = $conn->query($queryDailySales);
-        $data['dailySales'] = $resultDailySales->fetchColumn();
+        // Ventas diarias (adaptado)
+        $today = date('Y-m-d');
+        $salesData = $db->executeQuery('factura', [
+            'select' => ['count' => 'exact'],
+            'eq' => ['fecha', $today]
+        ]);
+        $data['dailySales'] = $salesData ? count($salesData) : 0;
 
-        $queryLowStock = "
-        SELECT COUNT(*) AS lowStock 
-            FROM inventario i
-            INNER JOIN productos p ON i.productos_id = p.id_producto
-            INNER JOIN catalago_productos cp ON p.catalago_productos = cp.id_catalago_productos
-            WHERE i.cantidad < 8 
-            AND i.activo = 1
-            AND cp.id_catalago_productos <> 1";
-        $resultLowStock = $conn->query($queryLowStock);
-        $data['lowStockProducts'] = $resultLowStock->fetchColumn();
+        // Productos con bajo stock (adaptado)
+        $lowStockData = $db->executeQuery('inventario', [
+            'select' => ['count' => 'exact'],
+            'lt' => ['cantidad', 8],
+            'eq' => ['activo', 1]
+        ]);
+        $data['lowStockProducts'] = $lowStockData ? count($lowStockData) : 0;
 
         return $data;
-
-
-        
     }
 }

@@ -29,7 +29,7 @@ $controller = new PagesController();
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="view/assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="view/assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="view/assets/dist/css/template.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
 
